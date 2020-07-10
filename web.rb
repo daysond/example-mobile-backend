@@ -271,7 +271,8 @@ post '/confirm_payment_intent' do
 
       # Create and confirm the PaymentIntent
       payment_intent = Stripe::PaymentIntent.create(
-        :amount => amount,
+       # :amount => amount,
+        :amount => payload[:amount] || @amount
         :currency => currency_for_country(payload[:country]),
         :customer => payload[:customer_id] || @customer.id,
         :source => payload[:source],
