@@ -387,6 +387,8 @@ def currency_for_country(country)
   case country
   when 'us'
     'usd'
+  when 'ca'
+    'cad'
   when 'mx'
     'mxn'
   when 'my'
