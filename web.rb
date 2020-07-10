@@ -26,8 +26,8 @@ post '/ephemeral_keys' do
   authenticate!
   begin
     key = Stripe::EphemeralKey.create(
-     # {customer: @customer.id},
-      {customer: params["customer_id"]},
+      {customer: @customer.id},
+      #{customer: params["customer_id"]},
       {stripe_version: params["api_version"]}
     )
   rescue Stripe::StripeError => e
@@ -356,7 +356,7 @@ def price_lookup(product)
 end
 
 def calculate_price(products, shipping)
-  amount = 1099  # Default amount.
+  amount = 2099  # Default amount.
 
   if products
     amount = products.reduce(0) { | sum, product | sum + price_lookup(product) }
