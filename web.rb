@@ -207,8 +207,8 @@ post '/create_customer' do
 
   begin
     Stripe::Customer.create(
-      :name => params["name"]
-      :email => params["email"]
+      :name => params["name"],
+      :email => params["email"],
       :description => 'testCustomer',
       :metadata => {
         # Add our application's customer id for this Customer, so it'll be easier to look up
