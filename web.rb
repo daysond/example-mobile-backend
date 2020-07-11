@@ -203,6 +203,32 @@ post '/create_setup_intent' do
   }.to_json
 end
 
+post '/create_customer' do
+
+  begin
+    Stripe::Customer.create(
+      :name => params["name"]
+      :email => params["email"]
+      :description => 'testCustomer',
+      :metadata => {
+        # Add our application's customer id for this Customer, so it'll be easier to look up
+        :my_customer_id => '777-7777-8888-8888',
+      },
+    )
+  
+  rescue Stripe::StripeError => e
+    status 402
+    return log_info("Error creating SetupIntent: #{e.message}")
+  end
+
+  log_info("SetupIntent successfully created: #{setup_intent.id}")
+  status 200
+  return {
+    :name => customer.name,
+    :customer_id => customer.id,
+  }.to_json
+end
+
 # ==== PaymentIntent Automatic Confirmation
 # See https://stripe.com/docs/payments/payment-intents/ios
 
