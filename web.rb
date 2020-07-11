@@ -224,11 +224,7 @@ post '/create_customer' do
   log_info("SetupIntent successfully created: #{setup_intent.id}")
   status 200
   return
-  customer.to_json
-  #{
-   # :name => customer.name,
-   # :customer_id => customer.id,
-  #}.to_json
+  customer.id
 end
 
 # ==== PaymentIntent Automatic Confirmation
